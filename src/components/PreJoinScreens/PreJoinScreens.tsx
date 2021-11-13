@@ -7,6 +7,8 @@ import { useAppState } from '../../state';
 import { useParams } from 'react-router-dom';
 import useVideoContext from '../../hooks/useVideoContext/useVideoContext';
 
+import SideBar from './../../tail/SideBar';
+
 export enum Steps {
   roomNameStep,
   deviceSelectionStep,
@@ -54,6 +56,7 @@ export default function PreJoinScreens() {
   return (
     <IntroContainer>
       <MediaErrorSnackbar error={mediaError} />
+      <SideBar />
       {step === Steps.roomNameStep && (
         <RoomNameScreen
           name={name}
