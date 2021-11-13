@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function LoungeList(props: any) {
   let lounges = [
@@ -119,6 +120,7 @@ export default function LoungeList(props: any) {
           </a>
         </li>
       </ul>
+      <Link to={`/join`}>join a room by name</Link>
     </section>
   );
 }
