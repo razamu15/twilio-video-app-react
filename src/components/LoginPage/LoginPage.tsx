@@ -67,7 +67,7 @@ export default function LoginPage() {
     setAuthError(null);
     signIn?.(passcode)
       .then(() => {
-        history.replace(location?.state?.from || { pathname: '/' });
+        history.replace(location?.state?.from || { pathname: '/dashboard' });
       })
       .catch(err => setAuthError(err));
   };
@@ -78,7 +78,7 @@ export default function LoginPage() {
   };
 
   if (user || !isAuthEnabled) {
-    history.replace('/');
+    history.replace('/dashboard');
   }
 
   if (!isAuthReady) {

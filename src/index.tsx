@@ -17,6 +17,8 @@ import { VideoProvider } from './components/VideoProvider';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
 
+import Dashboard from './components/dashboard/Dashboard';
+import Landing from './components/landing/Landing';
 import './index.css';
 
 const VideoApp = () => {
@@ -40,16 +42,21 @@ ReactDOM.render(
       <Router>
         <AppStateProvider>
           <Switch>
-            <PrivateRoute exact path="/">
+            <PrivateRoute exact path="/dashboard">
+              <Dashboard />
+            </PrivateRoute>
+            <PrivateRoute exact path="/join">
               <VideoApp />
             </PrivateRoute>
-            <PrivateRoute path="/room/:URLRoomName">
+            <PrivateRoute path="/lounge/:URLRoomName">
               <VideoApp />
             </PrivateRoute>
-            <Route path="/login">
+            <Route exact path="/login">
               <LoginPage />
             </Route>
-            <Redirect to="/" />
+            <Route exact path="/">
+              <Landing />
+            </Route>
           </Switch>
         </AppStateProvider>
       </Router>
