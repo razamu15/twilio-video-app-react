@@ -3,6 +3,7 @@ import { isMobile } from '../../../utils';
 import Video, { ConnectOptions, LocalTrack, Room } from 'twilio-video';
 import { VideoRoomMonitor } from '@twilio/video-room-monitor';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 // @ts-ignore
 window.TwilioVideo = Video;
@@ -11,6 +12,7 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
   const [room, setRoom] = useState<Room | null>(null);
   const [isConnecting, setIsConnecting] = useState(false);
   const optionsRef = useRef(options);
+  const history = useHistory();
 
   useEffect(() => {
     // This allows the connect function to always access the most recent version of the options object. This allows us to
@@ -32,8 +34,12 @@ export default function useRoom(localTracks: LocalTrack[], onError: Callback, op
           newRoom.setMaxListeners(15);
 
           newRoom.once('disconnected', () => {
+            setRoom(null);
+            history.replace({ pathname: '/dashboard' });
             // Reset the room only after all other `disconnected` listeners have been called.
-            setTimeout(() => setRoom(null));
+            // setTimeout(() => {
+            //   setRoom(null);
+            // });
             window.removeEventListener('beforeunload', disconnect);
 
             if (isMobile) {
