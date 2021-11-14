@@ -1,8 +1,7 @@
 import React from 'react';
 import SideBar from '../../tail/SideBar';
 import LoungeList from './LoungeList';
-import { useAppState } from '../../state';
-import { Switch, Link, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 const tabs = {
   roomsList: 'lounges',
@@ -13,6 +12,7 @@ const tabs = {
 
 export default function Dashboard() {
   const { path } = useRouteMatch();
+
   return (
     <div>
       <SideBar />

@@ -28,7 +28,7 @@
   }
 
   .content {
-    @apply fixed left-16;
+    @apply fixed left-16 w-11/12 z-40;
   }
 
   .sidebar-icon {
@@ -44,7 +44,7 @@
 
   .sidebar-tooltip {
     @apply absolute w-auto p-2 m-2 min-w-max left-14 rounded-md shadow-md
-    text-white bg-gray-900 
+    text-white bg-gray-900 z-50
     text-xs font-bold transform
     transition-all duration-100 scale-0 origin-left;
   }
