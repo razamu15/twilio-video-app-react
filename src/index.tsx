@@ -12,7 +12,6 @@ import LoginPage from './components/LoginPage/LoginPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import theme from './theme';
 import './types';
-import { ChatProvider } from './components/ChatProvider';
 import { VideoProvider } from './components/VideoProvider';
 import useConnectionOptions from './utils/useConnectionOptions/useConnectionOptions';
 import UnsupportedBrowserWarning from './components/UnsupportedBrowserWarning/UnsupportedBrowserWarning';
@@ -28,9 +27,7 @@ const VideoApp = () => {
   return (
     <VideoProvider options={connectionOptions} onError={setError}>
       <ErrorDialog dismissError={() => setError(null)} error={error} />
-      <ChatProvider>
-        <App />
-      </ChatProvider>
+      <App />
     </VideoProvider>
   );
 };
@@ -42,21 +39,21 @@ ReactDOM.render(
       <Router>
         <AppStateProvider>
           <Switch>
-            <PrivateRoute exact path="/dashboard">
-              <Dashboard />
-            </PrivateRoute>
+            <Route exact path="/">
+              <Landing />
+            </Route>
+            <Route exact path="/login">
+              <LoginPage />
+            </Route>
             <PrivateRoute exact path="/join">
               <VideoApp />
+            </PrivateRoute>
+            <PrivateRoute path="/dashboard">
+              <Dashboard />
             </PrivateRoute>
             <PrivateRoute path="/lounge/:URLRoomName">
               <VideoApp />
             </PrivateRoute>
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-            <Route exact path="/">
-              <Landing />
-            </Route>
           </Switch>
         </AppStateProvider>
       </Router>
