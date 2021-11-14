@@ -14,7 +14,7 @@ export default function Dashboard() {
   const { path } = useRouteMatch();
 
   return (
-    <div>
+    <div className="dash-main">
       <SideBar />
 
       <div className="content">

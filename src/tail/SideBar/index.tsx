@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Link, useRouteMatch } from 'react-router-dom';
-import { BsPlus, BsGearFill } from 'react-icons/bs';
-import { FaTrophy, FaHome, FaCouch, FaGamepad, FaRoute } from 'react-icons/fa';
+import { FaTrophy, FaHome, FaCouch, FaGamepad, FaRoute, FaSignOutAlt, FaPlus } from 'react-icons/fa';
+import { useAppState } from '../../state';
 
 const SideBar = (props: any) => {
   const { url } = useRouteMatch();
+  const { user, signOut } = useAppState();
+
+  const handleSignOut = useCallback(() => {
+    signOut?.();
+  }, [signOut]);
 
   return (
     <div className="sidebar">
@@ -15,8 +20,11 @@ const SideBar = (props: any) => {
       <SideBarIcon icon={<FaGamepad size="28" />} url={`${url}/minigames`} text="Mini-games" />
       <SideBarIcon icon={<FaTrophy size="28" />} url={`${url}/leaderboards`} text="Leaderboards" />
       <Divider />
-      <SideBarIcon icon={<BsPlus size="22" />} url={`/join`} text="Join a Lounge" />
-      <SideBarIcon icon={<BsGearFill size="22" />} url={`/logout`} text="Sign Out" />
+      <SideBarIcon icon={<FaPlus size="28" />} url={`/join`} text="Join a Lounge" />
+      <div className="sidebar-icon group" onClick={handleSignOut}>
+        <FaSignOutAlt size="28" />
+        <span className="sidebar-tooltip group-hover:scale-100">Logout</span>
+      </div>
     </div>
   );
 };
